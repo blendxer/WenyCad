@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://image/UI side/icons/mouse pointer_1.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+
+onready var board = $TextureRect
+
+var mouseDict:Dictionary={
+	'field_mouse':{
+		'path':'res://image/UI side/icons/mouse pointer_1.png',
+		'pos':'center'
+	},
+	'normal_mouse':{
+		'path':'res://image/UI side/icons/mouse pointer_2.png',
+		'pos':'top_left'
+	}
+}
+
+var boardSize:Vector2
+
+
+func _ready():
+	boardSize = board.rect_size
+	changeMousePointer('field_mouse')
+
+func changeMousePointer(mouseName):
+	board.texture = load(mouseDict[mouseName]['path'])
+	
+	if mouseDict[mouseName]['pos'] == 'center':
+		board.rect_position = -boardSize/2
+	elif mouseDict[mouseName]['pos'] == 'top_left':
+		board.rect_position = Vector2.ZERO
+		
+	
+	
+	
+
+"
+
+[node name="Control" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -14.0
+margin_top = -14.0
+margin_right = 14.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 10, 10 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1

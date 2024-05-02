@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/ruler3060.obj-948d00752490cbe5e075fa6751e41f0f.mesh"
+
+[deps]
+
+files=[ "res://.import/ruler3060.obj-948d00752490cbe5e075fa6751e41f0f.mesh" ]
+
+source_file="res://3d obj/drawingTool/ruler3060.obj"
+dest_files=[ "res://.import/ruler3060.obj-948d00752490cbe5e075fa6751e41f0f.mesh", "res://.import/ruler3060.obj-948d00752490cbe5e075fa6751e41f0f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

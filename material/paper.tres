@@ -1,0 +1,11 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://image/texture/15680-pbr-textures-rough.jpg" type="Texture" id=1]
+
+[resource]
+albedo_color = Color( 1, 0.996078, 0.968627, 1 )
+metallic_specular = 0.0
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 0.05
+normal_texture = ExtResource( 1 )

@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/drawing side/randoms/ray.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/perpendicular ruler object.gd" type="Script" id=2]
+
+[node name="perpendicular ruler object" type="Control"]
+script = ExtResource( 2 )
+
+[node name="holder" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="horizantalLine" type="Line2D" parent="holder"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 2.0
+default_color = Color( 0.431373, 1, 0.4, 0.541176 )
+
+[node name="rulerLine" type="Line2D" parent="holder"]
+points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+width = 3.0
+default_color = Color( 1, 0.39, 0.27, 1 )
+
+[node name="drawLine" type="Line2D" parent="holder"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 3.0
+default_color = Color( 0.917647, 0.917647, 0.917647, 1 )
+
+[node name="mouseLine" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 3.0
+default_color = Color( 0.968627, 0.4, 1, 1 )
+
+[node name="ray" parent="." instance=ExtResource( 1 )]

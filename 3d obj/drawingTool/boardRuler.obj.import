@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/boardRuler.obj-137f0cb23c2d982afc27ab7a878b115f.mesh"
+
+[deps]
+
+files=[ "res://.import/boardRuler.obj-137f0cb23c2d982afc27ab7a878b115f.mesh" ]
+
+source_file="res://3d obj/drawingTool/boardRuler.obj"
+dest_files=[ "res://.import/boardRuler.obj-137f0cb23c2d982afc27ab7a878b115f.mesh", "res://.import/boardRuler.obj-137f0cb23c2d982afc27ab7a878b115f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

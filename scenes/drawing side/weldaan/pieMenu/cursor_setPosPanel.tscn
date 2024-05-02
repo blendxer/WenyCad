@@ -1,0 +1,139 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://dynamicFont/regular.tres" type="DynamicFont" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Panel
+
+
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == 2:
+			WV.main.panelRemover()
+			queue_free()
+
+
+func _ready():
+	$HBoxContainer/x.text = str(WV.cursor.x)
+	$HBoxContainer/y.text = str(-WV.cursor.y)
+
+func _on_Button_pressed():
+	var pos = Vector2(
+			float($HBoxContainer/x.text),
+			-float($HBoxContainer/y.text))
+	
+	WV.drawingScreen.changeCursorPos(pos)
+	WV.main.panelRemover()
+	queue_free()
+
+
+func _on_toCenter_pressed():
+	$HBoxContainer/x.text = '0'
+	$HBoxContainer/y.text = '0'
+	_on_Button_pressed()
+"
+
+[node name="cursor_setPosPanel" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -108.0
+margin_top = -46.0
+margin_right = 108.0
+margin_bottom = 88.0
+custom_styles/panel = SubResource( 2 )
+script = SubResource( 1 )
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.508
+anchor_top = 0.5
+anchor_right = 0.508
+anchor_bottom = 0.5
+margin_left = -23.056
+margin_top = 2.0
+margin_right = 22.944
+margin_bottom = 22.0
+text = "set"
+
+[node name="toCenter" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -69.0
+margin_top = 33.0
+margin_right = 69.0
+margin_bottom = 53.0
+text = "move to center"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -74.0
+margin_top = -30.0
+margin_right = 74.0
+margin_bottom = -6.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 5.0
+margin_right = 10.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 10, 0 )
+text = "x"
+align = 1
+
+[node name="x" type="LineEdit" parent="HBoxContainer"]
+margin_left = 14.0
+margin_right = 72.0
+margin_bottom = 24.0
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+margin_left = 76.0
+margin_top = 5.0
+margin_right = 86.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 10, 0 )
+text = "y"
+align = 1
+
+[node name="y" type="LineEdit" parent="HBoxContainer"]
+margin_left = 90.0
+margin_right = 148.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -48.5
+margin_top = -50.0
+margin_right = 48.5
+margin_bottom = -32.0
+custom_fonts/font = ExtResource( 1 )
+text = "set cursor pos"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -99.5
+margin_top = 27.0
+margin_right = 99.5
+margin_bottom = 28.0
+color = Color( 0.701961, 0.701961, 0.701961, 1 )
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="toCenter" to="." method="_on_toCenter_pressed"]

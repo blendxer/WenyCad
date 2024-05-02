@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/eraser.obj-3059874cd37c99c614b6c04f3c0eecf2.mesh"
+
+[deps]
+
+files=[ "res://.import/eraser.obj-3059874cd37c99c614b6c04f3c0eecf2.mesh" ]
+
+source_file="res://3d obj/drawingTool/eraser.obj"
+dest_files=[ "res://.import/eraser.obj-3059874cd37c99c614b6c04f3c0eecf2.mesh", "res://.import/eraser.obj-3059874cd37c99c614b6c04f3c0eecf2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

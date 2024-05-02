@@ -1,0 +1,590 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://dynamicFont/regular.tres" type="DynamicFont" id=1]
+[ext_resource path="res://image/UI side/icons/objectDistibute/evenSpace.png" type="Texture" id=2]
+[ext_resource path="res://image/UI side/icons/objectDistibute/sideToSide.png" type="Texture" id=3]
+[ext_resource path="res://image/UI side/icons/objectDistibute/constantShift.png" type="Texture" id=4]
+[ext_resource path="res://scripts/weldaan/objectDistributePanel.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="bg" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.512
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 499.712
+margin_bottom = 300.0
+script = ExtResource( 5 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -270.0
+margin_top = -223.0
+margin_right = 270.0
+margin_bottom = 223.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 540.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+custom_fonts/font = ExtResource( 1 )
+text = "object Distribution"
+align = 1
+valign = 1
+
+[node name="Control" type="Control" parent="Panel/VBoxContainer"]
+margin_top = 34.0
+margin_right = 540.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 0, 2 )
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.0
+margin_top = -0.5
+margin_right = 75.0
+margin_bottom = 0.5
+rect_min_size = Vector2( 150, 1 )
+
+[node name="Control2" type="Control" parent="Panel/VBoxContainer"]
+margin_top = 40.0
+margin_right = 540.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="chooiceActive" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 64.0
+margin_right = 540.0
+margin_bottom = 334.0
+rect_min_size = Vector2( 0, 270 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/chooiceActive"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer"]
+margin_right = 180.0
+margin_bottom = 135.0
+mouse_filter = 2
+size_flags_horizontal = 7
+size_flags_vertical = 3
+color = Color( 0, 1, 0.905882, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect"]
+anchor_left = -0.0111111
+anchor_top = -0.016
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+mouse_filter = 2
+color = Color( 0.145098, 0.145098, 0.164706, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -61.5
+margin_top = -13.5
+margin_right = 61.5
+margin_bottom = 13.5
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect/ColorRect"]
+anchor_right = 1.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 1 )
+text = "even space"
+align = 1
+valign = 1
+
+[node name="ColorRect2" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer"]
+margin_left = 180.0
+margin_right = 360.0
+margin_bottom = 135.0
+mouse_filter = 2
+size_flags_horizontal = 7
+size_flags_vertical = 3
+color = Color( 0, 1, 0.905882, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+mouse_filter = 2
+color = Color( 0.145098, 0.145098, 0.164706, 1 )
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect2/ColorRect"]
+anchor_right = 1.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "side to side"
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect2/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -49.0
+margin_top = -16.0
+margin_right = 49.0
+margin_bottom = 16.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="ColorRect3" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer"]
+margin_left = 360.0
+margin_right = 540.0
+margin_bottom = 135.0
+mouse_filter = 2
+size_flags_horizontal = 7
+size_flags_vertical = 3
+color = Color( 0, 1, 0.905882, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_bottom = -2.0
+mouse_filter = 2
+color = Color( 0.145098, 0.145098, 0.164706, 1 )
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect3/ColorRect"]
+anchor_right = 1.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "constant shift"
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect3/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -17.5
+margin_right = 70.0
+margin_bottom = 17.5
+texture = ExtResource( 4 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect3/ColorRect"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -34.0
+margin_bottom = -10.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect3/ColorRect/HBoxContainer"]
+margin_left = 49.0
+margin_top = 3.0
+margin_right = 66.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 1 )
+text = "X="
+
+[node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect3/ColorRect/HBoxContainer"]
+margin_left = 70.0
+margin_right = 128.0
+margin_bottom = 24.0
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="ColorRect4" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer"]
+margin_top = 135.0
+margin_right = 180.0
+margin_bottom = 270.0
+mouse_filter = 2
+size_flags_horizontal = 7
+size_flags_vertical = 3
+color = Color( 0, 1, 0.905882, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = -2.0
+mouse_filter = 2
+color = Color( 0.145098, 0.145098, 0.164706, 1 )
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect"]
+anchor_right = 1.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "between two
+points"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -79.0
+margin_top = 1.5
+margin_right = 79.0
+margin_bottom = 53.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer"]
+margin_right = 158.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 54.0
+margin_bottom = 19.0
+text = "point #1"
+
+[node name="LineEdit0" type="LineEdit" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer/HBoxContainer"]
+margin_left = 58.0
+margin_right = 142.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="picker0" type="Button" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer/HBoxContainer"]
+margin_left = 146.0
+margin_right = 158.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer"]
+margin_top = 28.0
+margin_right = 158.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 54.0
+margin_bottom = 19.0
+text = "point #2"
+
+[node name="LineEdit0" type="LineEdit" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer/HBoxContainer2"]
+margin_left = 58.0
+margin_right = 142.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="picker0" type="Button" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer/HBoxContainer2"]
+margin_left = 146.0
+margin_right = 158.0
+margin_bottom = 24.0
+
+[node name="ColorRect5" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer"]
+margin_left = 180.0
+margin_top = 135.0
+margin_right = 360.0
+margin_bottom = 270.0
+mouse_filter = 2
+size_flags_horizontal = 7
+size_flags_vertical = 3
+color = Color( 0, 1, 0.905882, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+mouse_filter = 2
+color = Color( 0.145098, 0.145098, 0.164706, 1 )
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5/ColorRect"]
+anchor_right = 1.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "grid order"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.5
+margin_top = -26.0
+margin_right = 70.5
+margin_bottom = 26.0
+custom_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5/ColorRect/VBoxContainer"]
+margin_right = 141.0
+margin_bottom = 24.0
+
+[node name="gridBt" type="Button" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5/ColorRect/VBoxContainer/HBoxContainer"]
+margin_right = 79.0
+margin_bottom = 24.0
+text = "by column"
+
+[node name="count" type="LineEdit" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5/ColorRect/VBoxContainer/HBoxContainer"]
+margin_left = 83.0
+margin_right = 141.0
+margin_bottom = 24.0
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5/ColorRect/VBoxContainer"]
+margin_top = 34.0
+margin_right = 141.0
+margin_bottom = 58.0
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5/ColorRect/VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 50.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 50, 0 )
+text = "Shift"
+align = 1
+valign = 1
+
+[node name="shift" type="LineEdit" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5/ColorRect/VBoxContainer/HBoxContainer2"]
+margin_left = 54.0
+margin_right = 141.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="ColorRect6" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer"]
+margin_left = 360.0
+margin_top = 135.0
+margin_right = 540.0
+margin_bottom = 270.0
+mouse_filter = 2
+size_flags_horizontal = 7
+size_flags_vertical = 3
+color = Color( 0, 1, 0.905882, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+mouse_filter = 2
+color = Color( 0.145098, 0.145098, 0.164706, 1 )
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect"]
+anchor_right = 1.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "circluar"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect"]
+margin_top = 30.0
+margin_right = 166.0
+margin_bottom = 138.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer"]
+margin_right = 166.0
+margin_bottom = 24.0
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 41.0
+margin_bottom = 19.0
+text = "center"
+align = 1
+valign = 1
+
+[node name="LineEdit2" type="LineEdit" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer"]
+margin_left = 45.0
+margin_right = 150.0
+margin_bottom = 24.0
+size_flags_horizontal = 7
+size_flags_vertical = 3
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="picker2" type="Button" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer"]
+margin_left = 154.0
+margin_right = 166.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer"]
+margin_top = 28.0
+margin_right = 166.0
+margin_bottom = 52.0
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 39.0
+margin_bottom = 19.0
+text = "radius"
+align = 1
+valign = 1
+
+[node name="radius" type="LineEdit" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer2"]
+margin_left = 43.0
+margin_right = 166.0
+margin_bottom = 24.0
+size_flags_horizontal = 7
+size_flags_vertical = 3
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer"]
+margin_top = 56.0
+margin_right = 166.0
+margin_bottom = 80.0
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 68.0
+margin_bottom = 19.0
+text = "form angle"
+align = 1
+valign = 1
+
+[node name="start" type="LineEdit" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer3"]
+margin_left = 72.0
+margin_right = 166.0
+margin_bottom = 24.0
+size_flags_horizontal = 7
+size_flags_vertical = 3
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer"]
+margin_top = 84.0
+margin_right = 166.0
+margin_bottom = 108.0
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer4"]
+margin_top = 5.0
+margin_right = 70.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 70, 0 )
+text = "to angle"
+align = 1
+valign = 1
+
+[node name="end" type="LineEdit" parent="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer4"]
+margin_left = 74.0
+margin_right = 166.0
+margin_bottom = 24.0
+size_flags_horizontal = 7
+size_flags_vertical = 3
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="Control3" type="Control" parent="Panel/VBoxContainer"]
+margin_top = 338.0
+margin_right = 540.0
+margin_bottom = 378.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="ColorRect" type="ColorRect" parent="Panel/VBoxContainer/Control3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.0
+margin_top = -0.5
+margin_right = 75.0
+margin_bottom = 0.5
+rect_min_size = Vector2( 150, 1 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -101.0
+margin_top = 164.0
+margin_right = 114.0
+margin_bottom = 185.0
+custom_constants/separation = 20
+
+[node name="vertical" type="Button" parent="HBoxContainer3"]
+margin_right = 59.0
+margin_bottom = 21.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+text = "vertical"
+flat = true
+
+[node name="both" type="Button" parent="HBoxContainer3"]
+margin_left = 79.0
+margin_right = 120.0
+margin_bottom = 21.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "both"
+flat = true
+
+[node name="horizantal" type="Button" parent="HBoxContainer3"]
+margin_left = 140.0
+margin_right = 215.0
+margin_bottom = 21.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "horizantal"
+flat = true
+
+[node name="apply" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -21.5
+margin_top = 193.0
+margin_right = 24.5
+margin_bottom = 214.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "apply"
+
+[connection signal="pressed" from="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer/HBoxContainer/picker0" to="." method="_on_picker0_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect4/ColorRect/VBoxContainer/HBoxContainer2/picker0" to="." method="_on_picker1_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect5/ColorRect/VBoxContainer/HBoxContainer/gridBt" to="." method="_on_gridBt_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/chooiceActive/GridContainer/ColorRect6/ColorRect/VBoxContainer/HBoxContainer/picker2" to="." method="_on_picker2_pressed"]
+[connection signal="pressed" from="HBoxContainer3/vertical" to="." method="_on_vertical_pressed"]
+[connection signal="pressed" from="HBoxContainer3/both" to="." method="_on_both_pressed"]
+[connection signal="pressed" from="HBoxContainer3/horizantal" to="." method="_on_horizantal_pressed"]
+[connection signal="pressed" from="apply" to="." method="_on_apply_pressed"]

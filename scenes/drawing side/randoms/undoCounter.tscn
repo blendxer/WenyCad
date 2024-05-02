@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Roboto-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Control
+
+onready var bg = $ColorRect
+
+func changeNumber(_new):
+	$Label.text = str(_new)
+	if _new:
+		bg.color = Color(0,0,0,0)
+	else:
+		bg.color = Color('891a1f2b')
+"
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+font_data = ExtResource( 2 )
+
+[node name="undoCounter" type="Control"]
+anchor_left = 0.029
+anchor_top = 0.067
+anchor_right = 0.029
+anchor_bottom = 0.067
+margin_left = -29.696
+margin_top = -40.2
+margin_right = 0.303999
+margin_bottom = -0.200001
+mouse_filter = 2
+script = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.101961, 0.121569, 0.168627, 0.537255 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -14.0
+margin_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+valign = 1

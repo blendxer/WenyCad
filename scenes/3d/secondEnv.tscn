@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Environment" id=25]
+background_mode = 1
+background_color = Color( 0.521569, 0.631373, 0.654902, 1 )
+tonemap_exposure = 0.8
+
+[node name="secondEnv" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 25 )
+
+[node name="main" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00962245, 0.242293, -0.292606 )
+
+[node name="front" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.336378, 0.114975, 0.518912 )
+light_energy = 0.5
+
+[node name="back" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.315077, 0.114975, 0.577789 )
+light_energy = 0.5

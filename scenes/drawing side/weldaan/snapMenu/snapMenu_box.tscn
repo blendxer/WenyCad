@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://image/UI side/icons/objectAlignBg.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TextureButton
+
+onready var rect = $ColorRect
+onready var startPos = $start
+onready var endPos =$end
+
+var VecIndex:Vector2
+var DiagonalVec 
+
+func _ready():
+	DiagonalVec = endPos.position - startPos.position
+	updatePos()
+
+func _on_TextureButton_pressed():
+	var vec = get_global_mouse_position() - rect_global_position
+	vec/= rect_size/5
+	VecIndex = vec.floor()
+	updatePos()
+
+func updatePos():
+	var s1 = int(VecIndex.x+1)%2
+	var s2 = int(VecIndex.y+1)%2
+	if s1 and s2:
+		rect.rect_size = Vector2(12,12)
+		rect.rect_position = startPos.position + DiagonalVec/4 * VecIndex  - rect.rect_size/2
+	else:
+		if s2: # horizantal
+			rect.rect_size.x = DiagonalVec.x + 10
+			rect.rect_size.y = 10
+			rect.rect_position = startPos.position - Vector2(6,6)
+			rect.rect_position.y += (DiagonalVec/4 * VecIndex).y
+			
+		elif s1: # verical
+			rect.rect_size.y = DiagonalVec.y + 10
+			rect.rect_size.x = 10
+			rect.rect_position = startPos.position - Vector2(5,5)
+			rect.rect_position.x += (DiagonalVec/4 * VecIndex).x
+			
+		
+"
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0941176, 0.745098, 0.517647, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="TextureButton" type="TextureButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.5
+margin_top = -75.5
+margin_right = 74.5
+margin_bottom = 74.5
+rect_min_size = Vector2( 150, 150 )
+focus_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 1 )
+expand = true
+script = SubResource( 1 )
+
+[node name="ColorRect" type="Panel" parent="."]
+margin_right = 12.0
+margin_bottom = 12.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 2 )
+
+[node name="start" type="Position2D" parent="."]
+position = Vector2( 10.5, 11.5 )
+
+[node name="end" type="Position2D" parent="."]
+position = Vector2( 139.5, 139.5 )
+
+[connection signal="pressed" from="." to="." method="_on_TextureButton_pressed"]

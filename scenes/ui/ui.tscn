@@ -1,0 +1,147 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://image/UI side/world_ui/leg_2.png" type="Texture" id=1]
+[ext_resource path="res://image/UI side/rulerNumbers.png" type="Texture" id=2]
+[ext_resource path="res://image/UI side/world_ui/ui drawing.png" type="Texture" id=3]
+[ext_resource path="res://image/UI side/icons/compassor/compassor.png" type="Texture" id=4]
+[ext_resource path="res://image/UI side/world_ui/leg_1.png" type="Texture" id=5]
+[ext_resource path="res://image/UI side/world_ui/penHead.png" type="Texture" id=6]
+[ext_resource path="res://image/UI side/world_ui/ui drawingCover.png" type="Texture" id=7]
+[ext_resource path="res://image/UI side/world_ui/eraserLogo.png" type="Texture" id=8]
+[ext_resource path="res://image/UI side/world_ui/path286.png" type="Texture" id=9]
+[ext_resource path="res://scripts/ui.gd" type="Script" id=10]
+
+[node name="ui" type="ScrollContainer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -381.0
+margin_top = -101.0
+margin_right = 385.0
+scroll_horizontal_enabled = false
+scroll_vertical_enabled = false
+script = ExtResource( 10 )
+
+[node name="shield" type="Control" parent="."]
+margin_right = 766.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 766, 100 )
+
+[node name="background" type="TextureRect" parent="shield"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Control" type="Control" parent="shield"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = -35.0
+margin_bottom = -35.0
+
+[node name="Position2D" type="Position2D" parent="shield/Control"]
+visible = false
+position = Vector2( 0, 6 )
+
+[node name="ruler" type="TextureRect" parent="shield/Control/Position2D"]
+margin_left = -2.521
+margin_top = -7.828
+margin_right = 2046.48
+margin_bottom = 32.172
+texture = ExtResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="shield/Control/Position2D"]
+position = Vector2( 2038.17, 0 )
+
+[node name="pencil" type="Control" parent="shield/Control"]
+visible = false
+
+[node name="dot" type="TextureRect" parent="shield/Control/pencil"]
+margin_left = -3.0
+margin_top = 37.0
+margin_right = -3.0
+margin_bottom = 37.0
+texture = ExtResource( 9 )
+expand = true
+
+[node name="pencilTexture" type="TextureRect" parent="shield/Control/pencil"]
+margin_left = -7.862
+margin_top = 40.0
+margin_right = 14.138
+margin_bottom = 102.0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="line" type="ColorRect" parent="shield/Control/pencil"]
+margin_top = 41.0
+margin_bottom = 44.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="caliper" type="Control" parent="shield/Control"]
+visible = false
+margin_top = 35.0
+margin_bottom = 35.0
+
+[node name="leg1" type="Control" parent="shield/Control/caliper"]
+
+[node name="texture" type="TextureRect" parent="shield/Control/caliper/leg1"]
+margin_left = -5.0
+margin_right = 18.0
+margin_bottom = 130.0
+texture = ExtResource( 5 )
+expand = true
+flip_v = true
+
+[node name="leg2" type="Control" parent="shield/Control/caliper"]
+
+[node name="texture" type="TextureRect" parent="shield/Control/caliper/leg2"]
+margin_left = -5.0
+margin_right = 4.0
+margin_bottom = 130.0
+texture = ExtResource( 1 )
+expand = true
+flip_v = true
+
+[node name="compassor" type="Control" parent="shield/Control"]
+visible = false
+
+[node name="compassorHolder" type="Control" parent="shield/Control/compassor"]
+margin_left = 3.0
+margin_top = 168.0
+margin_right = 3.0
+margin_bottom = 168.0
+
+[node name="TextureRect" type="TextureRect" parent="shield/Control/compassor/compassorHolder"]
+margin_left = 147.0
+margin_top = -148.0
+margin_right = 444.0
+margin_bottom = 16.0
+rect_rotation = 90.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Polygon2D" type="Polygon2D" parent="shield/Control/compassor"]
+position = Vector2( 3, 8 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -5, 0, 5, 0, 0, 5 )
+
+[node name="eraser" type="Control" parent="shield/Control"]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="shield/Control/eraser"]
+margin_left = -58.0
+margin_top = -5.0
+margin_right = 107.0
+margin_bottom = 87.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+
+[node name="cover" type="TextureRect" parent="shield"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true

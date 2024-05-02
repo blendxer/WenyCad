@@ -1,0 +1,697 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://image/UI side/icons/singleIcon/line.png" type="Texture" id=1]
+[ext_resource path="res://image/UI side/icons/singleIcon/ruler3060.png" type="Texture" id=2]
+[ext_resource path="res://image/UI side/icons/singleIcon/perpendicularLine.png" type="Texture" id=3]
+[ext_resource path="res://image/UI side/icons/singleIcon/ruler45.png" type="Texture" id=4]
+[ext_resource path="res://image/UI side/icons/singleIcon/renderVideo.png" type="Texture" id=5]
+[ext_resource path="res://image/UI side/icons/singleIcon/protractor.png" type="Texture" id=6]
+[ext_resource path="res://image/UI side/icons/singleIcon/save.png" type="Texture" id=7]
+[ext_resource path="res://image/UI side/icons/singleIcon/measurement.png" type="Texture" id=8]
+[ext_resource path="res://image/UI side/icons/singleIcon/undo.png" type="Texture" id=9]
+[ext_resource path="res://scenes/drawing side/randoms/TextureRect.tscn" type="PackedScene" id=10]
+[ext_resource path="res://image/UI side/icons/singleIcon/alongLine.png" type="Texture" id=11]
+[ext_resource path="res://image/UI side/icons/singleIcon/dot.png" type="Texture" id=12]
+[ext_resource path="res://image/UI side/icons/singleIcon/circle.png" type="Texture" id=13]
+[ext_resource path="res://image/UI side/icons/singleIcon/load.png" type="Texture" id=14]
+[ext_resource path="res://image/UI side/icons/singleIcon/arrow.png" type="Texture" id=15]
+[ext_resource path="res://image/UI side/icons/singleIcon/curve.png" type="Texture" id=16]
+[ext_resource path="res://scenes/drawing side/randoms/grid.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/drawing side/randoms/infoBoard.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/drawing side/randoms/selectBox.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/drawing side/randoms/dashBox.tscn" type="PackedScene" id=20]
+[ext_resource path="res://image/UI side/icons/singleIcon/delete.png" type="Texture" id=21]
+[ext_resource path="res://scenes/drawing side/layeres/LayerPanel.tscn" type="PackedScene" id=22]
+[ext_resource path="res://image/UI side/icons/singleIcon/imageExport.png" type="Texture" id=23]
+[ext_resource path="res://scenes/drawing side/randoms/undoCounter.tscn" type="PackedScene" id=24]
+[ext_resource path="res://image/UI side/icons/cursor.png" type="Texture" id=25]
+[ext_resource path="res://scenes/drawing side/randoms/keycast.tscn" type="PackedScene" id=26]
+[ext_resource path="res://image/UI side/icons/setting.png" type="Texture" id=27]
+[ext_resource path="res://scripts/drawing screen.gd" type="Script" id=29]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.101961, 0.121569, 0.168627, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.101961, 0.121569, 0.168627, 1 )
+
+[sub_resource type="Gradient" id=3]
+interpolation_mode = 2
+colors = PoolColorArray( 0.376471, 0.376471, 0.376471, 0.282353, 0, 0, 0, 0.513726 )
+
+[sub_resource type="GradientTexture2D" id=4]
+gradient = SubResource( 3 )
+fill_from = Vector2( 0.488235, 0 )
+fill_to = Vector2( 0.494118, 1 )
+
+[node name="drawing screen" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+script = ExtResource( 29 )
+drawStraightLineBt = NodePath("tools/HBoxContainer/drawStraightLine")
+drawConnectionBt = NodePath("tools/HBoxContainer/drawConnection")
+imageExportBt = NodePath("tools/HBoxContainer/imageExport")
+perpendicular = NodePath("tools/HBoxContainer/perpendicular")
+drawCircleBt = NodePath("tools/HBoxContainer/drawCircle")
+lengthLabel = NodePath("tools/HBoxContainer/lengthLabel")
+saveAction = NodePath("tools/HBoxContainer/save action")
+loadAction = NodePath("tools/HBoxContainer/load action")
+ruler6030 = NodePath("tools/HBoxContainer/ruler6030")
+alongLine = NodePath("tools/HBoxContainer/alongLine")
+settingBt = NodePath("tools/HBoxContainer/setting")
+compassor = NodePath("tools/HBoxContainer/compassor")
+exportBt = NodePath("tools/HBoxContainer/export")
+deleteBt = NodePath("tools/HBoxContainer/delete")
+ruler45 = NodePath("tools/HBoxContainer/ruler45")
+mouseBt = NodePath("tools/HBoxContainer/mouse")
+undoBt = NodePath("tools/HBoxContainer/undo")
+redoBt = NodePath("tools/HBoxContainer/redo")
+dotBt = NodePath("tools/HBoxContainer/dot")
+
+[node name="tools" type="Panel" parent="."]
+margin_right = 1024.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="tools"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
+[node name="drawStraightLine" type="Button" parent="tools/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 40 )
+hint_tooltip = "Straight Line"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/drawStraightLine"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="drawCircle" type="Button" parent="tools/HBoxContainer"]
+margin_left = 50.0
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "Circle"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/drawCircle"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="drawConnection" type="Button" parent="tools/HBoxContainer"]
+margin_left = 100.0
+margin_right = 150.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "Beizer"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/drawConnection"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 6
+
+[node name="alongLine" type="Button" parent="tools/HBoxContainer"]
+margin_left = 150.0
+margin_right = 200.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "Along Line"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/alongLine"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="perpendicular" type="Button" parent="tools/HBoxContainer"]
+margin_left = 200.0
+margin_right = 250.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "Perpendicular Line"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/perpendicular"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="ruler6030" type="Button" parent="tools/HBoxContainer"]
+margin_left = 250.0
+margin_right = 300.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "Ruler 30-60"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/ruler6030"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="ruler45" type="Button" parent="tools/HBoxContainer"]
+margin_left = 300.0
+margin_right = 350.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "Ruler 45"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/ruler45"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="lengthLabel" type="Button" parent="tools/HBoxContainer"]
+margin_left = 350.0
+margin_right = 400.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "Meaurement"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/lengthLabel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="compassor" type="Button" parent="tools/HBoxContainer"]
+margin_left = 400.0
+margin_right = 450.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "Compassor"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/compassor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="dot" type="Button" parent="tools/HBoxContainer"]
+margin_left = 450.0
+margin_right = 500.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/dot"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="mouse" type="Button" parent="tools/HBoxContainer"]
+margin_left = 500.0
+margin_right = 550.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
+hint_tooltip = "Mouse"
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="tools/HBoxContainer/mouse"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 6
+
+[node name="space" type="Control" parent="tools/HBoxContainer"]
+margin_left = 550.0
+margin_right = 570.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="tools/HBoxContainer/space"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -0.5
+margin_top = -10.0
+margin_right = 0.5
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="undo" type="TextureButton" parent="tools/HBoxContainer"]
+margin_left = 570.0
+margin_right = 600.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "undo"
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="undoCounter" parent="tools/HBoxContainer/undo" instance=ExtResource( 24 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="redo" type="TextureButton" parent="tools/HBoxContainer"]
+margin_left = 600.0
+margin_right = 630.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "Redo"
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+flip_h = true
+
+[node name="redoCounter" parent="tools/HBoxContainer/redo" instance=ExtResource( 24 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="delete" type="TextureButton" parent="tools/HBoxContainer"]
+margin_left = 630.0
+margin_right = 660.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "Delete"
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 21 )
+expand = true
+stretch_mode = 5
+
+[node name="save action" type="TextureButton" parent="tools/HBoxContainer"]
+margin_left = 660.0
+margin_right = 690.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "Save file"
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="load action" type="TextureButton" parent="tools/HBoxContainer"]
+margin_left = 690.0
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "Load file"
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="export" type="TextureButton" parent="tools/HBoxContainer"]
+margin_left = 720.0
+margin_right = 750.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "animate"
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="imageExport" type="TextureButton" parent="tools/HBoxContainer"]
+margin_left = 750.0
+margin_right = 780.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "Export image"
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 23 )
+expand = true
+stretch_mode = 5
+
+[node name="setting" type="TextureButton" parent="tools/HBoxContainer"]
+margin_left = 780.0
+margin_right = 810.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 0 )
+hint_tooltip = "Setting"
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 27 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="tools/HBoxContainer"]
+margin_left = 810.0
+margin_top = 13.0
+margin_right = 1024.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+text = "version  -1.0   "
+align = 2
+
+[node name="toolSelectShield" type="Control" parent="tools"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="downSide" type="HSplitContainer" parent="."]
+margin_top = 40.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 7
+custom_constants/autohide = 1
+custom_constants/separation = 3
+
+[node name="leftPanel" type="Panel" parent="downSide"]
+margin_right = 250.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 250, 0 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="VBoxContainer" type="VSplitContainer" parent="downSide/leftPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="downSide/leftPanel/VBoxContainer"]
+margin_right = 250.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 300 )
+
+[node name="panelHolder" type="Control" parent="downSide/leftPanel/VBoxContainer/ScrollContainer"]
+margin_right = 250.0
+margin_bottom = 300.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+
+[node name="layerPanel" type="Control" parent="downSide/leftPanel/VBoxContainer"]
+margin_top = 312.0
+margin_right = 250.0
+margin_bottom = 562.0
+rect_min_size = Vector2( 0, 250 )
+size_flags_horizontal = 7
+size_flags_vertical = 5
+
+[node name="LayerPanel_2" parent="downSide/leftPanel/VBoxContainer/layerPanel" instance=ExtResource( 22 )]
+
+[node name="leftPanelShield" type="Control" parent="downSide/leftPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="field" type="Button" parent="downSide"]
+margin_left = 258.0
+margin_right = 1024.0
+margin_bottom = 560.0
+focus_mode = 0
+mouse_filter = 1
+size_flags_horizontal = 15
+enabled_focus_mode = 0
+flat = true
+
+[node name="background" type="TextureRect" parent="downSide/field"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 4 )
+expand = true
+stretch_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="downSide/field"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="shield" type="Control" parent="downSide/field/ScrollContainer"]
+margin_right = 766.0
+margin_bottom = 560.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+
+[node name="grid" parent="downSide/field/ScrollContainer/shield" instance=ExtResource( 17 )]
+
+[node name="underHolder" type="Control" parent="downSide/field/ScrollContainer/shield"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="selectBox" parent="downSide/field/ScrollContainer/shield/underHolder" instance=ExtResource( 19 )]
+
+[node name="ViewportContainer" type="ViewportContainer" parent="downSide/field"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="downSide/field/ViewportContainer"]
+size = Vector2( 766, 560 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="steadyHolder" type="Control" parent="downSide/field/ViewportContainer/Viewport"]
+margin_left = 258.0
+margin_top = 40.0
+margin_right = 298.0
+margin_bottom = 80.0
+
+[node name="holder" type="ScrollContainer" parent="downSide/field"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="shield" type="Control" parent="downSide/field/holder"]
+mouse_filter = 1
+
+[node name="mainObjectHolder" type="Control" parent="downSide/field/holder/shield"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+mouse_filter = 1
+size_flags_horizontal = 7
+size_flags_vertical = 7
+
+[node name="effect" type="Control" parent="downSide/field/holder/shield/mainObjectHolder"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="snapLine1" type="Line2D" parent="downSide/field/holder/shield/mainObjectHolder/effect"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 2.0
+default_color = Color( 0.952941, 1, 0.4, 1 )
+
+[node name="snapLine2" type="Line2D" parent="downSide/field/holder/shield/mainObjectHolder/effect"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 2.0
+default_color = Color( 0.952941, 1, 0.4, 1 )
+
+[node name="alignLine2d" type="Line2D" parent="downSide/field/holder/shield/mainObjectHolder/effect"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 3.0
+default_color = Color( 0.286275, 1, 0.298039, 0.862745 )
+
+[node name="box" type="Line2D" parent="downSide/field/holder/shield/mainObjectHolder/effect"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+default_color = Color( 0.0627451, 0.0627451, 0.0627451, 0.792157 )
+
+[node name="layerBackup" type="Control" parent="downSide/field/holder/shield/mainObjectHolder"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="initialHolder" type="Control" parent="downSide/field/holder/shield/mainObjectHolder"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="cursor" type="Control" parent="downSide/field/holder/shield/mainObjectHolder"]
+
+[node name="textrue" type="TextureRect" parent="downSide/field/holder/shield/mainObjectHolder/cursor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -7.0
+margin_right = 7.0
+margin_bottom = 7.0
+texture = ExtResource( 25 )
+expand = true
+
+[node name="exportImageBoxHolder" type="Control" parent="downSide/field"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="infoBoard" parent="downSide/field" instance=ExtResource( 18 )]
+anchor_top = 1.0
+anchor_right = 0.999
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = -23.0
+margin_right = -0.254028
+margin_bottom = -3.0
+
+[node name="mousepointer" parent="downSide/field" instance=ExtResource( 10 )]
+visible = false
+margin_right = 28.0
+margin_bottom = 28.0
+mouse_filter = 1
+
+[node name="right field" type="Button" parent="downSide/field"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 0
+mouse_filter = 1
+shortcut_in_tooltip = false
+button_mask = 2
+enabled_focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="downSide/field"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 581.0
+margin_top = 393.0
+expand = true
+
+[node name="dashBox" parent="downSide/field" instance=ExtResource( 20 )]
+
+[node name="keycast" parent="downSide/field" instance=ExtResource( 26 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -258.0
+margin_top = -329.0
+margin_right = 0.0
+margin_bottom = -25.0
+
+[connection signal="button_down" from="downSide/field" to="." method="_on_field_button_down"]
+[connection signal="pressed" from="downSide/field" to="." method="fieldBt"]
+[connection signal="pressed" from="downSide/field/right field" to="." method="right_field"]

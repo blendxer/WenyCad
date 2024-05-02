@@ -1,0 +1,228 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://themes/test theme.tres" type="Theme" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VBoxContainer
+
+
+onready var lengthBoard = $\"HBoxContainer3/VBoxContainer/HBoxContainer/LineEdit length\"
+onready var angleBoard = $\"HBoxContainer3/VBoxContainer/HBoxContainer2/LineEdit angle\"
+
+var angle:float=0
+var object
+var length
+
+
+func updateValues():
+	object.updateValues({'angle':angle,
+	'length':lengthBoard.text})
+
+func updateBt():
+	# check if angle board is empty to use just buttons
+	if not angleBoard.text == '':
+		angle = float(angleBoard.text)
+		
+	
+	updateValues()
+
+func finshBt():
+	object.finshProcess()
+	
+func angle0Bt():
+	angle = .0
+	angleBoard.text = '0'
+	updateValues()
+func angle90Bt():
+	angle = 90.0
+	angleBoard.text = '90'
+	updateValues()
+func angle180Bt():
+	angle = 180.0
+	angleBoard.text = '180'
+	updateValues()
+func angle270Bt():
+	angle = 270.0
+	angleBoard.text = '270'
+	updateValues()
+"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="straight line panel" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 10
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 1024.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 2 )
+text = "Straight Line"
+align = 1
+valign = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = 60.0
+margin_right = 1024.0
+margin_bottom = 61.0
+rect_min_size = Vector2( 0, 1 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+margin_top = 71.0
+margin_right = 1024.0
+margin_bottom = 123.0
+
+[node name="Control2" type="Control" parent="HBoxContainer3"]
+margin_right = 10.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer3"]
+margin_left = 14.0
+margin_right = 1010.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer3/VBoxContainer"]
+margin_right = 996.0
+margin_bottom = 24.0
+
+[node name="length label" type="Label" parent="HBoxContainer3/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 90.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 15
+size_flags_stretch_ratio = 0.1
+text = "Length"
+align = 1
+valign = 1
+
+[node name="LineEdit length" type="LineEdit" parent="HBoxContainer3/VBoxContainer/HBoxContainer"]
+margin_left = 94.0
+margin_right = 996.0
+margin_bottom = 24.0
+size_flags_horizontal = 15
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer3/VBoxContainer"]
+margin_top = 28.0
+margin_right = 996.0
+margin_bottom = 52.0
+
+[node name="length label" type="Label" parent="HBoxContainer3/VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 90.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 15
+size_flags_stretch_ratio = 0.1
+text = "Angle"
+align = 1
+valign = 1
+
+[node name="LineEdit angle" type="LineEdit" parent="HBoxContainer3/VBoxContainer/HBoxContainer2"]
+margin_left = 94.0
+margin_right = 996.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 20, 0 )
+size_flags_horizontal = 15
+
+[node name="Control" type="Control" parent="HBoxContainer3"]
+margin_left = 1014.0
+margin_right = 1024.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_top = 133.0
+margin_right = 1024.0
+margin_bottom = 153.0
+size_flags_horizontal = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+margin_left = 417.0
+margin_right = 607.0
+margin_bottom = 20.0
+custom_constants/separation = 10
+
+[node name="270" type="Button" parent="CenterContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 0 )
+focus_mode = 0
+theme = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "270"
+
+[node name="180" type="Button" parent="CenterContainer/HBoxContainer"]
+margin_left = 50.0
+margin_right = 90.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 0 )
+focus_mode = 0
+theme = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "180"
+
+[node name="90" type="Button" parent="CenterContainer/HBoxContainer"]
+margin_left = 100.0
+margin_right = 140.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 0 )
+focus_mode = 0
+theme = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "90"
+
+[node name="0" type="Button" parent="CenterContainer/HBoxContainer"]
+margin_left = 150.0
+margin_right = 190.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 0 )
+focus_mode = 0
+theme = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "0"
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+margin_top = 163.0
+margin_right = 1024.0
+margin_bottom = 183.0
+size_flags_horizontal = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer2"]
+margin_left = 447.0
+margin_right = 576.0
+margin_bottom = 20.0
+custom_constants/separation = 30
+
+[node name="update" type="Button" parent="CenterContainer2/HBoxContainer"]
+margin_right = 56.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 0 )
+focus_mode = 0
+theme = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "update"
+
+[node name="finsh" type="Button" parent="CenterContainer2/HBoxContainer"]
+margin_left = 86.0
+margin_right = 129.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 0 )
+focus_mode = 0
+theme = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "finsh"
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/270" to="." method="angle270Bt"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/180" to="." method="angle180Bt"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/90" to="." method="angle90Bt"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/0" to="." method="angle0Bt"]
+[connection signal="pressed" from="CenterContainer2/HBoxContainer/update" to="." method="updateBt"]
+[connection signal="pressed" from="CenterContainer2/HBoxContainer/finsh" to="." method="finshBt"]

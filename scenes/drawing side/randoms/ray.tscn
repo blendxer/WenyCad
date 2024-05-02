@@ -1,0 +1,94 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://image/UI side/icons/raySeqment.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+onready var line_1 = $Line2D
+onready var extraLine_1 = $extraLine_1
+onready var extraLine_2 = $extraLine_2
+
+var InnerRadius = 6
+var OutterRadius = 8
+var InnerColor = Color.darkcyan
+var OutterColor = Color.white
+
+var Pos_1
+var MovingPoint
+
+func _ready():
+	Pos_1 = WV.mousePointer
+	var node_1 = Control.new()
+	node_1.rect_position = Pos_1
+	add_child(node_1)
+	node_1.add_child(drawCircle(OutterRadius,OutterColor))
+	node_1.add_child(drawCircle(InnerRadius,InnerColor))
+	line_1.points[0] = Pos_1
+	extraLine_2.rect_position = Pos_1
+	
+	MovingPoint = Control.new()
+	add_child(MovingPoint)
+	MovingPoint.add_child(drawCircle(OutterRadius,OutterColor))
+	MovingPoint.add_child(drawCircle(InnerRadius,InnerColor))
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		extraLine_1.show()
+		extraLine_2.show()
+		line_1.show()
+		var angle = (-Pos_1+WV.mousePointer).angle()
+		MovingPoint.rect_position = WV.mousePointer
+		line_1.points[1] = WV.mousePointer
+		extraLine_1.rect_position = WV.mousePointer
+		extraLine_1.set_rotation(angle)
+		extraLine_2.set_rotation(angle+PI)
+	
+	if event is InputEventMouseButton:
+		queue_free()
+		
+
+func drawCircle(radius:int,c):
+	var circleReslution:float = 20
+	var circleInstance = Polygon2D.new()
+	circleInstance.color = c
+	var fraction:float
+	var list = []
+	for index in circleReslution:
+		fraction = index/circleReslution
+		var vec = polar2cartesian(radius,TAU*fraction)
+		list.append(vec)
+	circleInstance.polygon = list
+	return circleInstance
+"
+
+[node name="ray" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 3.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="extraLine_1" type="Control" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="extraLine_1"]
+margin_top = -1.0
+margin_right = 1000.0
+margin_bottom = 1.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="extraLine_2" type="Control" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="extraLine_2"]
+margin_top = -1.0
+margin_right = 1000.0
+margin_bottom = 1.0
+texture = ExtResource( 2 )
+stretch_mode = 2

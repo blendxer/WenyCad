@@ -1,0 +1,138 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/drawing side/weldaan/snapMenu/snapMenu_box.tscn" type="PackedScene" id=1]
+[ext_resource path="res://dynamicFont/regular.tres" type="DynamicFont" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Panel
+
+func _ready():
+	$HBoxContainer/active.VecIndex = SettingLog.fetch('snapMenu/activeIndex')
+	$HBoxContainer/objects.VecIndex = SettingLog.fetch('snapMenu/otherIndex')
+	$HBoxContainer/active.updatePos()
+	$HBoxContainer/objects.updatePos()
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.pressed:
+			if event.button_index == 2 :
+				cancel()
+			if event.button_index == 1:
+				var rect = Rect2(rect_global_position,rect_size)
+				var p = get_global_mouse_position()
+				if !rect.has_point(p):
+					cancel()
+					
+		
+func cancel():
+	WV.main.panelRemover()
+	queue_free()
+	
+func _on_apply_pressed():
+	var activeIndex = $HBoxContainer/active.VecIndex
+	var otherIndex = $HBoxContainer/objects.VecIndex
+	SettingLog.save('snapMenu/activeIndex',activeIndex)
+	SettingLog.save('snapMenu/otherIndex',otherIndex)
+	Organizer.snap(activeIndex,otherIndex)
+	WV.main.panelRemover()
+	queue_free()
+	
+"
+
+[node name="objectDistributePanel" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -194.0
+margin_top = -170.0
+margin_right = 194.0
+margin_bottom = 126.0
+script = SubResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -194.0
+margin_top = -69.0
+margin_right = 194.0
+margin_bottom = 108.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="active" parent="HBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 34.0
+margin_top = 0.0
+margin_right = 184.0
+margin_bottom = 150.0
+
+[node name="objects" parent="HBoxContainer" instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 204.0
+margin_top = 0.0
+margin_right = 354.0
+margin_bottom = 150.0
+
+[node name="label_active" type="Label" parent="."]
+margin_left = 87.0
+margin_top = 50.0
+margin_right = 129.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 2 )
+text = "Active"
+
+[node name="label_Obj" type="Label" parent="."]
+margin_left = 245.0
+margin_top = 50.0
+margin_right = 314.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 2 )
+text = "non-active"
+
+[node name="label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -130.0
+margin_right = 40.0
+margin_bottom = -112.0
+custom_fonts/font = ExtResource( 2 )
+text = "Object Align"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -107.0
+margin_right = 50.0
+margin_bottom = -106.0
+
+[node name="apply" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -48.0
+margin_top = 92.0
+margin_right = 48.0
+margin_bottom = 116.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 2 )
+enabled_focus_mode = 0
+text = "Apply"
+flat = true
+
+[connection signal="pressed" from="apply" to="." method="_on_apply_pressed"]

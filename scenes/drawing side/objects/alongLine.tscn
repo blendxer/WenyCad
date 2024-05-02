@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/alongLine.gd" type="Script" id=1]
+[ext_resource path="res://scenes/drawing side/randoms/ray.tscn" type="PackedScene" id=2]
+
+[node name="alongLine" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="dashLine1" type="Line2D" parent="."]
+width = 2.0
+default_color = Color( 0.4, 0.501961, 1, 0.709804 )
+
+[node name="dashLine2" type="Line2D" parent="."]
+width = 2.0
+default_color = Color( 0.027451, 0.0745098, 0.176471, 1 )
+
+[node name="drawLine" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 3.0
+default_color = Color( 0.917647, 0.917647, 0.917647, 1 )
+
+[node name="dotHolder" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ray" parent="." instance=ExtResource( 2 )]

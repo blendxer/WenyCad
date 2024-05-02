@@ -1,0 +1,353 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://3d obj/drawingTool/caliper_base.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://3d obj/drawingTool/eraser.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://3d obj/drawingTool/caliper_hat.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://3d obj/drawingTool/ruler45.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://3d obj/drawingTool/caliper_hand.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://scripts/world.gd" type="Script" id=6]
+[ext_resource path="res://3d obj/drawingTool/protractor.obj" type="ArrayMesh" id=7]
+[ext_resource path="res://3d obj/drawingTool/board.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://3d obj/drawingTool/pen.obj" type="ArrayMesh" id=10]
+[ext_resource path="res://image/texture/15680-pbr-textures-rough.jpg" type="Texture" id=11]
+[ext_resource path="res://scenes/3d/cameraObject.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/ui/ui.tscn" type="PackedScene" id=13]
+[ext_resource path="res://material/transparentPlastic.tres" type="Material" id=14]
+[ext_resource path="res://material/paper.tres" type="Material" id=15]
+[ext_resource path="res://material/board.tres" type="Material" id=16]
+[ext_resource path="res://dynamicFont/regular.tres" type="DynamicFont" id=17]
+[ext_resource path="res://material/caliper.tres" type="Material" id=18]
+[ext_resource path="res://image/rulerImages/ruler45.png" type="Texture" id=19]
+[ext_resource path="res://image/rulerImages/pencil_hb.png" type="Texture" id=20]
+[ext_resource path="res://image/rulerImages/ruler3060_base.png" type="Texture" id=21]
+[ext_resource path="res://image/rulerImages/ruler3060_oppoiste.png" type="Texture" id=22]
+[ext_resource path="res://image/rulerImages/protractor.png" type="Texture" id=23]
+[ext_resource path="res://image/rulerImages/eraser.png" type="Texture" id=24]
+[ext_resource path="res://3d obj/drawingTool/boardRuler.obj" type="ArrayMesh" id=25]
+[ext_resource path="res://3d obj/drawingTool/boardRulerLock.obj" type="ArrayMesh" id=26]
+
+[sub_resource type="QuadMesh" id=3]
+size = Vector2( 0.29, 0.4 )
+
+[sub_resource type="SpatialMaterial" id=25]
+albedo_color = Color( 0.266667, 0.266667, 0.266667, 1 )
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Spatial
+
+onready var base = $base
+onready var hand = $hand
+onready var hat  = $hat
+
+var InitalWidth:float
+var FinalWidth:float
+var CurrentWidth:float
+
+func _ready():
+	# initial setup
+	setWidth(0.01)
+	rotation_degrees.x = 90
+	CurrentWidth = .01
+	
+
+func newWidth(_distance):
+	FinalWidth = _distance
+	InitalWidth = CurrentWidth
+	
+func build(fac):
+	var distance = lerp(InitalWidth , FinalWidth ,fac)
+	setWidth(distance)
+	if fac == 1:
+		CurrentWidth = FinalWidth
+
+
+func setWidth(_distance:float):
+	# save position and roation for recover them later
+	var oldPos = translation
+	var oldRot = rotation
+	# restart the position and rotation
+	translation = Vector3.ZERO
+	rotation = Vector3.ZERO
+	# set hand and hat position
+	hand.translation.x = -_distance
+	hat.translation = Vector3(-_distance/2 ,sqrt(.01-_distance*_distance/4) ,0)
+	hand.look_at(hat.translation,Vector3(1,0,0))
+	base.look_at(hat.translation,Vector3(0,0,1))
+	# recover the old position and rotation
+	translation = oldPos
+	rotation = oldRot
+
+
+
+
+
+
+"
+
+[sub_resource type="QuadMesh" id=6]
+size = Vector2( 0.145, 0.145 )
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+albedo_texture = ExtResource( 19 )
+
+[sub_resource type="SpatialMaterial" id=8]
+params_cull_mode = 2
+albedo_texture = ExtResource( 20 )
+
+[sub_resource type="SpatialMaterial" id=19]
+albedo_color = Color( 0.619608, 0.619608, 0.619608, 1 )
+albedo_texture = ExtResource( 24 )
+
+[sub_resource type="SpatialMaterial" id=9]
+resource_name = "uv_test"
+albedo_color = Color( 0.8, 0.8, 0.8, 1 )
+metallic = 0.5
+
+[sub_resource type="ArrayMesh" id=10]
+surfaces/0 = {
+"aabb": AABB( -0.232923, 0, -0.134478, 0.232933, 0.001436, 0.134488 ),
+"array_data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 129, 129, 103, 194, 54, 245, 55, 45, 64, 219, 188, 0, 0, 0, 0, 103, 127, 160, 188, 0, 129, 129, 103, 185, 55, 49, 56, 94, 131, 110, 190, 0, 0, 0, 0, 0, 0, 0, 0, 0, 129, 129, 103, 58, 57, 46, 59, 112, 233, 24, 190, 0, 0, 0, 0, 103, 127, 160, 188, 0, 129, 129, 103, 213, 56, 224, 57, 0, 0, 0, 0, 0, 0, 0, 0, 154, 180, 9, 190, 0, 129, 129, 103, 58, 57, 211, 53, 45, 64, 219, 188, 0, 0, 0, 0, 212, 130, 183, 189, 0, 129, 129, 103, 211, 56, 70, 55, 94, 131, 110, 190, 0, 0, 0, 0, 0, 0, 0, 0, 129, 80, 178, 65, 193, 54, 46, 59, 0, 0, 0, 0, 0, 0, 0, 0, 154, 180, 9, 190, 129, 80, 106, 93, 144, 47, 81, 56, 94, 131, 110, 190, 14, 245, 59, 58, 0, 0, 0, 0, 129, 80, 178, 65, 164, 54, 255, 58, 0, 0, 0, 0, 14, 245, 59, 58, 154, 180, 9, 190, 129, 80, 106, 93, 50, 48, 88, 56, 112, 233, 24, 190, 0, 0, 0, 0, 103, 127, 160, 188, 127, 127, 116, 68, 87, 52, 12, 55, 45, 64, 219, 188, 0, 0, 0, 0, 103, 127, 160, 188, 127, 127, 160, 78, 86, 52, 248, 51, 112, 233, 24, 190, 14, 245, 59, 58, 103, 127, 160, 188, 127, 127, 116, 68, 100, 52, 63, 55, 45, 64, 219, 188, 14, 245, 59, 58, 103, 127, 160, 188, 127, 127, 160, 78, 108, 52, 216, 51, 0, 0, 0, 0, 0, 0, 0, 0, 154, 180, 9, 190, 127, 0, 0, 69, 144, 47, 81, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 0, 0, 66, 193, 54, 148, 55, 0, 0, 0, 0, 14, 245, 59, 58, 154, 180, 9, 190, 127, 0, 0, 69, 50, 48, 88, 56, 0, 0, 0, 0, 14, 245, 59, 58, 0, 0, 0, 0, 127, 0, 0, 66, 155, 54, 181, 55, 255, 146, 212, 188, 42, 56, 188, 58, 103, 155, 155, 188, 0, 127, 129, 103, 175, 57, 238, 57, 89, 222, 213, 188, 42, 56, 188, 58, 151, 196, 185, 189, 0, 127, 129, 103, 171, 58, 127, 58, 168, 170, 80, 186, 42, 56, 188, 58, 120, 212, 24, 186, 0, 127, 129, 103, 59, 57, 33, 58, 39, 163, 74, 186, 42, 56, 188, 58, 221, 96, 8, 190, 0, 127, 129, 103, 13, 59, 46, 59, 45, 64, 219, 188, 0, 0, 0, 0, 103, 127, 160, 188, 129, 0, 0, 58, 86, 52, 248, 51, 45, 64, 219, 188, 0, 0, 0, 0, 212, 130, 183, 189, 129, 0, 0, 54, 79, 48, 129, 52, 45, 64, 219, 188, 14, 245, 59, 58, 103, 127, 160, 188, 129, 0, 0, 58, 108, 52, 216, 51, 45, 64, 219, 188, 14, 245, 59, 58, 212, 130, 183, 189, 129, 0, 0, 54, 32, 48, 121, 52, 45, 64, 219, 188, 0, 0, 0, 0, 212, 130, 183, 189, 46, 0, 99, 31, 79, 48, 129, 52, 112, 233, 24, 190, 0, 0, 0, 0, 103, 127, 160, 188, 46, 0, 180, 60, 87, 52, 12, 55, 45, 64, 219, 188, 14, 245, 59, 58, 212, 130, 183, 189, 46, 0, 98, 31, 32, 48, 121, 52, 112, 233, 24, 190, 14, 245, 59, 58, 103, 127, 160, 188, 46, 0, 180, 60, 100, 52, 63, 55, 128, 130, 27, 190, 42, 56, 188, 58, 141, 155, 154, 188, 0, 127, 129, 103, 174, 58, 50, 56, 139, 255, 107, 190, 42, 56, 188, 58, 3, 36, 26, 186, 0, 127, 129, 103, 13, 59, 241, 53, 255, 146, 212, 188, 42, 56, 188, 58, 103, 155, 155, 188, 217, 126, 170, 69, 130, 52, 161, 51, 128, 130, 27, 190, 42, 56, 188, 58, 141, 155, 154, 188, 217, 126, 108, 66, 130, 52, 147, 55, 245, 74, 217, 188, 188, 177, 160, 58, 102, 16, 159, 188, 217, 126, 170, 69, 119, 52, 190, 51, 54, 172, 25, 190, 188, 177, 160, 58, 231, 196, 158, 188, 217, 126, 109, 66, 113, 52, 101, 55, 245, 74, 217, 188, 188, 177, 160, 58, 102, 16, 159, 188, 164, 126, 170, 78, 119, 52, 190, 51, 54, 172, 25, 190, 188, 177, 160, 58, 231, 196, 158, 188, 164, 126, 110, 69, 113, 52, 101, 55, 45, 64, 219, 188, 14, 245, 59, 58, 103, 127, 160, 188, 164, 126, 170, 78, 108, 52, 216, 51, 112, 233, 24, 190, 14, 245, 59, 58, 103, 127, 160, 188, 164, 126, 110, 69, 100, 52, 63, 55, 89, 222, 213, 188, 42, 56, 188, 58, 151, 196, 185, 189, 220, 90, 244, 60, 144, 47, 108, 52, 255, 146, 212, 188, 42, 56, 188, 58, 103, 155, 155, 188, 220, 90, 247, 61, 130, 52, 161, 51, 134, 173, 217, 188, 188, 177, 160, 58, 44, 44, 184, 189, 220, 90, 244, 60, 240, 47, 115, 52, 245, 74, 217, 188, 188, 177, 160, 58, 102, 16, 159, 188, 220, 90, 247, 61, 119, 52, 190, 51, 134, 173, 217, 188, 188, 177, 160, 58, 44, 44, 184, 189, 167, 37, 249, 55, 240, 47, 115, 52, 245, 74, 217, 188, 188, 177, 160, 58, 102, 16, 159, 188, 167, 37, 252, 58, 119, 52, 190, 51, 45, 64, 219, 188, 14, 245, 59, 58, 212, 130, 183, 189, 167, 37, 249, 55, 32, 48, 121, 52, 45, 64, 219, 188, 14, 245, 59, 58, 103, 127, 160, 188, 167, 37, 252, 58, 108, 52, 216, 51, 45, 64, 219, 188, 14, 245, 59, 58, 212, 130, 183, 189, 36, 26, 85, 32, 32, 48, 121, 52, 112, 233, 24, 190, 14, 245, 59, 58, 103, 127, 160, 188, 36, 26, 182, 60, 100, 52, 63, 55, 134, 173, 217, 188, 188, 177, 160, 58, 44, 44, 184, 189, 36, 26, 85, 32, 240, 47, 115, 52, 54, 172, 25, 190, 188, 177, 160, 58, 231, 196, 158, 188, 36, 26, 182, 60, 113, 52, 101, 55, 134, 173, 217, 188, 188, 177, 160, 58, 44, 44, 184, 189, 18, 77, 88, 50, 240, 47, 115, 52, 54, 172, 25, 190, 188, 177, 160, 58, 231, 196, 158, 188, 18, 77, 182, 62, 113, 52, 101, 55, 89, 222, 213, 188, 42, 56, 188, 58, 151, 196, 185, 189, 18, 77, 87, 50, 144, 47, 108, 52, 128, 130, 27, 190, 42, 56, 188, 58, 141, 155, 154, 188, 18, 77, 182, 62, 130, 52, 147, 55, 0, 0, 0, 0, 14, 245, 59, 58, 0, 0, 0, 0, 0, 32, 147, 56, 155, 54, 181, 55, 94, 131, 110, 190, 14, 245, 59, 58, 0, 0, 0, 0, 0, 32, 120, 61, 164, 54, 255, 58, 118, 81, 116, 185, 188, 177, 160, 58, 119, 78, 51, 185, 0, 32, 147, 56, 126, 54, 211, 55, 227, 198, 109, 190, 188, 177, 160, 58, 230, 90, 52, 185, 0, 32, 120, 61, 134, 54, 210, 58, 118, 81, 116, 185, 188, 177, 160, 58, 119, 78, 51, 185, 0, 84, 149, 60, 126, 54, 211, 55, 227, 198, 109, 190, 188, 177, 160, 58, 230, 90, 52, 185, 0, 84, 120, 62, 134, 54, 210, 58, 168, 170, 80, 186, 42, 56, 188, 58, 120, 212, 24, 186, 0, 84, 149, 60, 105, 54, 237, 55, 139, 255, 107, 190, 42, 56, 188, 58, 3, 36, 26, 186, 0, 84, 120, 62, 107, 54, 170, 58, 0, 0, 0, 0, 14, 245, 59, 58, 154, 180, 9, 190, 87, 39, 253, 67, 50, 48, 88, 56, 0, 0, 0, 0, 14, 245, 59, 58, 0, 0, 0, 0, 87, 39, 255, 65, 155, 54, 181, 55, 106, 250, 108, 185, 188, 177, 160, 58, 64, 81, 9, 190, 87, 39, 253, 67, 155, 48, 94, 56, 118, 81, 116, 185, 188, 177, 160, 58, 119, 78, 51, 185, 87, 39, 255, 65, 126, 54, 211, 55, 106, 250, 108, 185, 188, 177, 160, 58, 64, 81, 9, 190, 34, 92, 249, 64, 155, 48, 94, 56, 118, 81, 116, 185, 188, 177, 160, 58, 119, 78, 51, 185, 34, 92, 252, 64, 126, 54, 211, 55, 39, 163, 74, 186, 42, 56, 188, 58, 221, 96, 8, 190, 34, 92, 249, 64, 244, 48, 101, 56, 168, 170, 80, 186, 42, 56, 188, 58, 120, 212, 24, 186, 34, 92, 252, 64, 105, 54, 237, 55, 39, 163, 74, 186, 42, 56, 188, 58, 221, 96, 8, 190, 211, 110, 117, 81, 244, 48, 101, 56, 139, 255, 107, 190, 42, 56, 188, 58, 3, 36, 26, 186, 211, 110, 179, 64, 107, 54, 170, 58, 106, 250, 108, 185, 188, 177, 160, 58, 64, 81, 9, 190, 211, 110, 117, 81, 155, 48, 94, 56, 227, 198, 109, 190, 188, 177, 160, 58, 230, 90, 52, 185, 211, 110, 179, 64, 134, 54, 210, 58, 106, 250, 108, 185, 188, 177, 160, 58, 64, 81, 9, 190, 159, 91, 107, 89, 155, 48, 94, 56, 227, 198, 109, 190, 188, 177, 160, 58, 230, 90, 52, 185, 159, 91, 179, 64, 134, 54, 210, 58, 0, 0, 0, 0, 14, 245, 59, 58, 154, 180, 9, 190, 159, 91, 107, 89, 50, 48, 88, 56, 94, 131, 110, 190, 14, 245, 59, 58, 0, 0, 0, 0, 159, 91, 179, 64, 164, 54, 255, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 148, 54, 193, 54, 148, 55, 94, 131, 110, 190, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 60, 193, 54, 46, 59, 0, 0, 0, 0, 14, 245, 59, 58, 0, 0, 0, 0, 0, 0, 148, 54, 155, 54, 181, 55, 94, 131, 110, 190, 14, 245, 59, 58, 0, 0, 0, 0, 0, 0, 120, 60, 164, 54, 255, 58 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0, 4, 0, 5, 0, 0, 0, 0, 0, 5, 0, 1, 0, 2, 0, 3, 0, 4, 0, 4, 0, 3, 0, 5, 0, 6, 0, 7, 0, 8, 0, 8, 0, 7, 0, 9, 0, 10, 0, 11, 0, 12, 0, 12, 0, 11, 0, 13, 0, 14, 0, 15, 0, 16, 0, 16, 0, 15, 0, 17, 0, 18, 0, 19, 0, 20, 0, 20, 0, 19, 0, 21, 0, 22, 0, 23, 0, 24, 0, 24, 0, 23, 0, 25, 0, 26, 0, 27, 0, 28, 0, 28, 0, 27, 0, 29, 0, 19, 0, 30, 0, 21, 0, 21, 0, 30, 0, 31, 0, 30, 0, 18, 0, 31, 0, 31, 0, 18, 0, 20, 0, 32, 0, 33, 0, 34, 0, 34, 0, 33, 0, 35, 0, 36, 0, 37, 0, 38, 0, 38, 0, 37, 0, 39, 0, 40, 0, 41, 0, 42, 0, 42, 0, 41, 0, 43, 0, 44, 0, 45, 0, 46, 0, 46, 0, 45, 0, 47, 0, 48, 0, 49, 0, 50, 0, 50, 0, 49, 0, 51, 0, 52, 0, 53, 0, 54, 0, 54, 0, 53, 0, 55, 0, 56, 0, 57, 0, 58, 0, 58, 0, 57, 0, 59, 0, 60, 0, 61, 0, 62, 0, 62, 0, 61, 0, 63, 0, 64, 0, 65, 0, 66, 0, 66, 0, 65, 0, 67, 0, 68, 0, 69, 0, 70, 0, 70, 0, 69, 0, 71, 0, 72, 0, 73, 0, 74, 0, 74, 0, 73, 0, 75, 0, 76, 0, 77, 0, 78, 0, 78, 0, 77, 0, 79, 0, 80, 0, 81, 0, 82, 0, 82, 0, 81, 0, 83, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 144,
+"material": SubResource( 9 ),
+"name": "uv_test",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 84
+}
+
+[sub_resource type="SpatialMaterial" id=11]
+flags_transparent = true
+albedo_color = Color( 0.772549, 0.772549, 0.772549, 0.627451 )
+metallic_specular = 0.0
+roughness_texture = ExtResource( 11 )
+
+[sub_resource type="QuadMesh" id=12]
+size = Vector2( 0.22, 0.005 )
+
+[sub_resource type="SpatialMaterial" id=13]
+flags_transparent = true
+albedo_texture = ExtResource( 21 )
+
+[sub_resource type="QuadMesh" id=14]
+size = Vector2( 0.005, 0.13 )
+
+[sub_resource type="SpatialMaterial" id=15]
+flags_transparent = true
+albedo_texture = ExtResource( 22 )
+
+[sub_resource type="QuadMesh" id=17]
+size = Vector2( 0.108, 0.059 )
+
+[sub_resource type="SpatialMaterial" id=18]
+flags_transparent = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 23 )
+
+[sub_resource type="QuadMesh" id=4]
+size = Vector2( 3, 2 )
+
+[sub_resource type="ViewportTexture" id=23]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="SpatialMaterial" id=24]
+resource_local_to_scene = true
+albedo_texture = SubResource( 23 )
+
+[sub_resource type="QuadMesh" id=22]
+size = Vector2( 0.43, 0.297 )
+
+[node name="world" type="Spatial"]
+script = ExtResource( 6 )
+
+[node name="board" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00214802, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="board"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+material_override = ExtResource( 16 )
+mesh = ExtResource( 9 )
+
+[node name="board center" type="Position3D" parent="board"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.21628 )
+
+[node name="paper" type="MeshInstance" parent="board"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.002, 0.226 )
+mesh = SubResource( 3 )
+material/0 = ExtResource( 15 )
+
+[node name="board ruler" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131449, 0, 0 )
+
+[node name="down" type="Position3D" parent="board ruler"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14079, 0, 0 )
+
+[node name="up" type="Position3D" parent="board ruler"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.138463, 0, 0 )
+
+[node name="rulerStartCounting" type="Position3D" parent="board ruler"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0365017, 0, 0.0349364 )
+
+[node name="boardRuler" type="MeshInstance" parent="board ruler"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.007, 0.001 )
+mesh = ExtResource( 25 )
+material/0 = ExtResource( 14 )
+
+[node name="boardRulerLock" type="MeshInstance" parent="board ruler"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.0076193, 0.00131745 )
+mesh = ExtResource( 26 )
+skeleton = NodePath("../boardRuler")
+material/0 = SubResource( 25 )
+
+[node name="caliper" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113, 0, -0.046 )
+script = SubResource( 1 )
+
+[node name="base" type="Spatial" parent="caliper"]
+
+[node name="MeshInstance" type="MeshInstance" parent="caliper/base"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86265e-09, -0.000302985 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 18 )
+
+[node name="hat" type="Spatial" parent="caliper"]
+
+[node name="MeshInstance" type="MeshInstance" parent="caliper/hat"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 18 )
+
+[node name="hand" type="Spatial" parent="caliper"]
+
+[node name="MeshInstance" type="MeshInstance" parent="caliper/hand"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -9.9577e-06 )
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 18 )
+
+[node name="physicalLineHolder" type="Spatial" parent="."]
+
+[node name="ruler45" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.186866, -0.00113139, 0.407856 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ruler45"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = ExtResource( 14 )
+
+[node name="head1" type="Position3D" parent="ruler45"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.156071, 0, 0 )
+
+[node name="head2" type="Position3D" parent="ruler45"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15615 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="ruler45"]
+transform = Transform( -4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0.074, 0.001, -0.074 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
+
+[node name="pen" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0332306, 0, -0.0615645 )
+
+[node name="MeshInstance" type="MeshInstance" parent="pen"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = ExtResource( 10 )
+material/0 = SubResource( 8 )
+
+[node name="eraser" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0444236, 0.0110735, 0.478074 )
+
+[node name="MeshInstance" type="MeshInstance" parent="eraser"]
+transform = Transform( 0.0010908, -0.499999, 0, 0.499999, 0.0010908, 0, 0, 0, 0.5, -0.00010673, 0.00840182, 0 )
+mesh = ExtResource( 2 )
+material/0 = SubResource( 19 )
+
+[node name="ruler 6030" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.187036, 0, 0.244591 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ruler 6030"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="60" type="Position3D" parent="ruler 6030"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.133, 0, 0 )
+
+[node name="30" type="Position3D" parent="ruler 6030"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.232482 )
+
+[node name="ruler base" type="MeshInstance" parent="ruler 6030"]
+transform = Transform( -4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.00268195, 0.00197002, -0.110107 )
+mesh = SubResource( 12 )
+material/0 = SubResource( 13 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="ruler 6030"]
+transform = Transform( -4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.0651146, 0.00174274, -0.00255567 )
+mesh = SubResource( 14 )
+material/0 = SubResource( 15 )
+
+[node name="protractor" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.211789, 0, -0.049935 )
+
+[node name="MeshInstance" type="MeshInstance" parent="protractor"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.49012e-08, 0.00116787, 0 )
+mesh = ExtResource( 7 )
+
+[node name="drawShift" type="Position3D" parent="protractor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0600372 )
+
+[node name="verticalShift" type="Position3D" parent="protractor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01275, 0, 0.0612858 )
+
+[node name="horizantalShift" type="Position3D" parent="protractor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0611537, 0, 0 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="protractor"]
+transform = Transform( 1.06581e-14, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, -1.06581e-14, -4.37114e-08, 0.0249795, 0.00318441, -0.000147242 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
+
+[node name="camera" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00225665, 0, 0.217906 )
+
+[node name="cameraObject" parent="camera" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="cameraTarget" type="Position3D" parent="camera"]
+
+[node name="env" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="env"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.00458557, 0.156168 )
+mesh = SubResource( 4 )
+
+[node name="ui" parent="." instance=ExtResource( 13 )]
+
+[node name="newPaper" type="MeshInstance" parent="."]
+transform = Transform( 1.31134e-07, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, -1.31134e-07, -5.73206e-15, 0.00277814, 0, 0.217161 )
+material_override = SubResource( 24 )
+mesh = SubResource( 22 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 10, 10 )
+render_target_v_flip = true
+
+[node name="ColorRect" type="ColorRect" parent="Viewport"]
+margin_right = 4000.0
+margin_bottom = 4000.0
+color = Color( 0.945098, 0.945098, 0.945098, 1 )
+
+[node name="Holder_2d" type="Control" parent="Viewport"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="speedLabel" type="Label" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 84.0
+margin_top = 57.0
+margin_right = 154.0
+margin_bottom = 104.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 17 )

@@ -1,0 +1,117 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Control
+
+
+
+func quit():
+	get_tree().quit()
+
+func cancel():
+	get_parent().quitPanel()
+
+
+func _on_yesBt_pressed():
+	quit()
+
+
+func _on_cancelBt_pressed():
+	cancel()
+
+func _on_bgBt_pressed():
+	cancel()
+"
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.235294, 0.235294, 0.235294, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="quitPanel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 2 )
+
+[node name="bg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.45098 )
+
+[node name="bgBt" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+button_mask = 7
+flat = true
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -182.0
+margin_top = -59.0
+margin_right = 182.0
+margin_bottom = 59.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_right = 1.0
+margin_bottom = 45.0
+text = "Do you want to quit"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 55.0
+margin_bottom = -29.0
+custom_constants/separation = 70
+alignment = 1
+
+[node name="yesBt" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 87.0
+margin_right = 147.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 60, 0 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Yes"
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="Panel/HBoxContainer/yesBt"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 60, 0 )
+mouse_filter = 2
+color = Color( 0.517647, 0.180392, 0.180392, 1 )
+
+[node name="cancelBt" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 217.0
+margin_right = 277.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 60, 0 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Cancel"
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="Panel/HBoxContainer/cancelBt"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 60, 0 )
+mouse_filter = 2
+color = Color( 0.180392, 0.368627, 0.517647, 1 )
+
+[connection signal="pressed" from="bgBt" to="." method="_on_bgBt_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/yesBt" to="." method="_on_yesBt_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/cancelBt" to="." method="_on_cancelBt_pressed"]

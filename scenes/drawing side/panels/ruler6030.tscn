@@ -1,0 +1,181 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Roboto-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VBoxContainer
+
+
+var object
+
+func _ready():
+	pass
+
+
+func _on_flipAxis1_pressed():
+	object.flipAxis1()
+
+func _on_flipAxis2_pressed():
+	object.flipAxis2()
+
+
+func _on_angle_30_pressed():
+	object.switchAngle(60)
+
+func _on_angle_60_pressed():
+	object.switchAngle(30)
+
+
+func _on_update_pressed():
+	var dict:Dictionary
+	dict['start'] = $HBoxContainer/VBoxContainer/HBoxContainer2/start.text
+	dict['end'] = $HBoxContainer/VBoxContainer/HBoxContainer3/end.text
+	object.updateValues(dict)
+
+func _on_finsh_pressed():
+	object.finshProcess()
+"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="ruler 6030" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 1024.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 2 )
+text = "Ruler 30-60"
+align = 1
+valign = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = 54.0
+margin_right = 1024.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 59.0
+margin_right = 1024.0
+margin_bottom = 297.0
+
+[node name="Control2" type="Control" parent="HBoxContainer"]
+margin_right = 10.0
+margin_bottom = 238.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 14.0
+margin_right = 1010.0
+margin_bottom = 238.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="flipAxis1" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_right = 996.0
+margin_bottom = 20.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Flip horizantally"
+
+[node name="flipAxis2" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 30.0
+margin_right = 996.0
+margin_bottom = 50.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Flip vertically"
+
+[node name="angle 30" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 996.0
+margin_bottom = 80.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Angle 30"
+
+[node name="angle 60" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 90.0
+margin_right = 996.0
+margin_bottom = 110.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Angle 60"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 120.0
+margin_right = 996.0
+margin_bottom = 144.0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 60.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 60, 0 )
+text = "start"
+align = 1
+valign = 1
+
+[node name="start" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 64.0
+margin_right = 996.0
+margin_bottom = 24.0
+hint_tooltip = "Start"
+size_flags_horizontal = 3
+align = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 154.0
+margin_right = 996.0
+margin_bottom = 178.0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 60.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 60, 0 )
+text = "end"
+align = 1
+valign = 1
+
+[node name="end" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 64.0
+margin_right = 996.0
+margin_bottom = 24.0
+hint_tooltip = "Start"
+size_flags_horizontal = 3
+align = 1
+
+[node name="update" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 188.0
+margin_right = 996.0
+margin_bottom = 208.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Update"
+
+[node name="finsh" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 218.0
+margin_right = 996.0
+margin_bottom = 238.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Finsh"
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+margin_left = 1014.0
+margin_right = 1024.0
+margin_bottom = 238.0
+rect_min_size = Vector2( 10, 0 )
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/flipAxis1" to="." method="_on_flipAxis1_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/flipAxis2" to="." method="_on_flipAxis2_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/angle 30" to="." method="_on_angle_30_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/angle 60" to="." method="_on_angle_60_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/update" to="." method="_on_update_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/finsh" to="." method="_on_finsh_pressed"]

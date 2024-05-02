@@ -1,0 +1,152 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Roboto-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VBoxContainer
+
+var object
+
+func _on_flip_x_pressed():
+	object.flipXaxis()
+
+
+func _on_flip_y_pressed():
+	object.flipYaxis()
+	_on_update_pressed()
+
+func _on_update_pressed():
+	var text1 = $HBoxContainer/VBoxContainer/HBoxContainer2/LineEdit.text
+	var text2 = $HBoxContainer/VBoxContainer/HBoxContainer3/LineEdit.text
+	var dict: = {'p1':text1,'p2':text2}
+	object.updateValues(dict)
+	
+func _on_finsh_pressed():
+	object.finshProcess()
+"
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 1 )
+
+[node name="perpendicular panel" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+custom_constants/separation = 10
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 1024.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 3 )
+text = "Perpendicular Panel"
+align = 1
+valign = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = 60.0
+margin_right = 1024.0
+margin_bottom = 61.0
+rect_min_size = Vector2( 0, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 71.0
+margin_right = 1024.0
+margin_bottom = 249.0
+
+[node name="Control2" type="Control" parent="HBoxContainer"]
+margin_right = 10.0
+margin_bottom = 178.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 14.0
+margin_right = 1010.0
+margin_bottom = 178.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="flip x" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_right = 996.0
+margin_bottom = 20.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Flip horizantally"
+
+[node name="flip y" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 30.0
+margin_right = 996.0
+margin_bottom = 50.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Flip vertically"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 996.0
+margin_bottom = 84.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 60.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 60, 0 )
+text = "Start"
+align = 1
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 70.0
+margin_right = 996.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 94.0
+margin_right = 996.0
+margin_bottom = 118.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 60.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 60, 0 )
+text = "End"
+align = 1
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 70.0
+margin_right = 996.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="update" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 128.0
+margin_right = 996.0
+margin_bottom = 148.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Update"
+
+[node name="finsh" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 158.0
+margin_right = 996.0
+margin_bottom = 178.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Finsh"
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+margin_left = 1014.0
+margin_right = 1024.0
+margin_bottom = 178.0
+rect_min_size = Vector2( 10, 0 )
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/flip x" to="." method="_on_flip_x_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/flip y" to="." method="_on_flip_y_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/update" to="." method="_on_update_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/finsh" to="." method="_on_finsh_pressed"]

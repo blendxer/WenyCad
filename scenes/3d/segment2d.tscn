@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Line2D
+
+
+
+var PointsList:Array
+var PathLength:float
+var PathLengthList:Array = [0]
+var Index=1
+
+func _ready():
+	pass
+#	var center = get_viewport_rect().size/2
+#	var list:Array=[]
+#	for i in 10:
+#		var fac = float(i)/9
+#		var angle = fac * 2 * PI
+#		var pnt = 200 * Vector2(cos(angle),sin(angle)) + center
+#		list.append(pnt)
+#	add_list(list)
+#
+#	for i in 1000:
+#		var fac = float(i)/999
+#		build(fac)
+#		yield(get_tree().create_timer(.01),\"timeout\")
+	
+func add_list(_list):
+	
+	var f = (1.44/.43) * WV.castEngineSize.y
+	for i in _list.size():
+		_list[i] -= WV.boardCenter
+		_list[i] *= f
+		_list[i] = Vector2(_list[i].y,-_list[i].x) + WV.castEngineSize/2
+		
+	add_point(_list[0])
+	add_point(_list[0])
+	PointsList = _list
+	for i in _list.size()-1:
+		PathLength += (_list[i+1]-_list[i]).length()
+		PathLengthList.append(PathLength)
+
+
+func build(fac):
+	var dis = fac * PathLength
+	for i in PathLengthList.size()-1:
+		if dis > PathLengthList[Index]:
+			Index+=1
+			add_point(PointsList[Index])
+		
+		var minFac = (dis - PathLengthList[Index-1])/(PathLengthList[Index]-PathLengthList[Index-1])
+		points[-1] = lerp(PointsList[Index-1],PointsList[Index],minFac)
+
+
+
+
+
+
+"
+
+[node name="segment2d" type="Line2D"]
+width = 6.0
+default_color = Color( 1, 0, 0, 1 )
+script = SubResource( 1 )

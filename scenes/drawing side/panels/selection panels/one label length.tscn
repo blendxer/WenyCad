@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Roboto-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VBoxContainer
+
+
+onready var lineEdit = $\"HBoxContainer3/VBoxContainer/HBoxContainer/LineEdit length\"
+var object
+
+func _ready():
+	lineEdit.text = str(CheckIntersection.active.digit)
+
+
+func _on_LineEdit_length_text_changed(new_text):
+	object.updateDigitCount(new_text)
+"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="row" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 1024.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 2 )
+text = "set digit"
+align = 1
+valign = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+margin_top = 54.0
+margin_right = 1024.0
+margin_bottom = 78.0
+
+[node name="Control2" type="Control" parent="HBoxContainer3"]
+margin_right = 10.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer3"]
+margin_left = 14.0
+margin_right = 1010.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer3/VBoxContainer"]
+margin_right = 996.0
+margin_bottom = 24.0
+
+[node name="length label" type="Label" parent="HBoxContainer3/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 90.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_horizontal = 15
+size_flags_stretch_ratio = 0.1
+text = "digit count"
+align = 1
+valign = 1
+
+[node name="LineEdit length" type="LineEdit" parent="HBoxContainer3/VBoxContainer/HBoxContainer"]
+margin_left = 94.0
+margin_right = 996.0
+margin_bottom = 24.0
+size_flags_horizontal = 15
+
+[node name="Control" type="Control" parent="HBoxContainer3"]
+margin_left = 1014.0
+margin_right = 1024.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 10, 0 )
+
+[connection signal="text_changed" from="HBoxContainer3/VBoxContainer/HBoxContainer/LineEdit length" to="." method="_on_LineEdit_length_text_changed"]
